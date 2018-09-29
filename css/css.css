@@ -8,9 +8,13 @@
 h1 { color: #5B258E; letter-spacing: 4px; }
 a:hover h1 { color: #A179C7; }
 
-body { margin: 10px; background-color: #F3FbF3; }
+body { margin: 20px; background-color: #F3FbF3; }
 
-a:hover { text-decoration: underline; }
+a { text-decoration: none; color: #A52A2A; }
+label.current, a.current, a:hover { text-decoration: underline; color: #D91313; }
+
+.center { margin: auto; }
+div.center { text-align: center; }
 
 .display-none { display: none; }
 .visibility-hidden { visibility: hidden; }
@@ -27,13 +31,22 @@ fieldset {
 
 legend {
 	margin: auto;
-	padding: 4px 8px 2px 8px;
+	padding: 4px 10px 2px 10px;
 	border: 1px solid #A9A9A9;
 	border-bottom: none;
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
+	font-weight: bold;
 }
 
 fieldset, legend {
 	background-color: #F3F9FF;
+}
+
+.chords > label {
+	margin-left: 30px;
+}
+
+.chords > label > span {
+	display: inline-grid;
 }
