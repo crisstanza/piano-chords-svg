@@ -1,0 +1,33 @@
+* {
+	box-sizing: inherit;
+	color: #444;
+}
+*:not(pre) { font-family: Roboto, sans-serif; }
+*:not(h1) { font-size: 17pt; }
+
+h1 { color: #5B258E; letter-spacing: 4px; }
+a:hover h1 { color: #A179C7; }
+
+body { margin: 20px; background-color: #F7F7F8; }
+
+a:hover { text-decoration: underline; }
+
+.display-none { display: none; }
+.visibility-hidden { visibility: hidden; }
+
+.github-icon { top: 2px; position: relative; opacity: 0.3; }
+
+fieldset {
+	padding: 10px;
+	padding-bottom: 5px;
+	padding-top: 3px;
+	border: 1px solid #A9A9A9;
+	width: fit-content;
+	border-radius: 10px;
+}
+
+legend {
+	margin: auto;
+	padding-left: 5px;
+	padding-right: 5px;
+}
