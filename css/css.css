@@ -5,7 +5,7 @@
 *:not(pre) { font-family: Roboto, sans-serif; }
 *:not(h1) { font-size: 17pt; }
 
-h1 { color: #5B258E; letter-spacing: 4px; }
+h1 { color: #5B258E; letter-spacing: 2px; }
 a:hover h1 { color: #A179C7; }
 
 body { margin: 20px; background-color: #F3FbF3; }
@@ -18,7 +18,7 @@ div.center { text-align: center; }
 
 .display-none { display: none; }
 .visibility-hidden { visibility: hidden; }
-.float-right { float: right; }
+/* .float-right { float: right; } */
 
 .github-icon { top: 2px; position: relative; opacity: 0.3; }
 
