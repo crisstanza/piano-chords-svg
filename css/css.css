@@ -5,8 +5,8 @@
 *:not(pre) { font-family: Roboto, sans-serif; }
 *:not(h1) { font-size: 17pt; }
 
-h1 { color: #5B258E; letter-spacing: 2px; }
-a:hover h1 { color: #A179C7; }
+h1 { color: #4B1B79; letter-spacing: 2px; }
+a:hover h1 { text-decoration: underline; }
 
 body { margin: 20px; background-color: #F3FbF3; }
 
