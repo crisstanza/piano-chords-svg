@@ -8,19 +8,18 @@
 h1 { color: #5B258E; letter-spacing: 4px; }
 a:hover h1 { color: #A179C7; }
 
-body { margin: 20px; background-color: #F7F7F8; }
+body { margin: 10px; background-color: #F3FbF3; }
 
 a:hover { text-decoration: underline; }
 
 .display-none { display: none; }
 .visibility-hidden { visibility: hidden; }
+.float-right { float: right; }
 
 .github-icon { top: 2px; position: relative; opacity: 0.3; }
 
 fieldset {
-	padding: 10px;
-	padding-bottom: 5px;
-	padding-top: 3px;
+	padding: 0 11px 7px 11px;
 	border: 1px solid #A9A9A9;
 	width: fit-content;
 	border-radius: 10px;
@@ -28,6 +27,13 @@ fieldset {
 
 legend {
 	margin: auto;
-	padding-left: 5px;
-	padding-right: 5px;
+	padding: 4px 8px 2px 8px;
+	border: 1px solid #A9A9A9;
+	border-bottom: none;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
+
+fieldset, legend {
+	background-color: #F3F9FF;
 }
