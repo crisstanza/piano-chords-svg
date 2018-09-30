@@ -1,7 +1,7 @@
 (function() {
 
-	var linksChords, links, linksMap, minor, sharp, chordName;
-	var svg;
+	var linksChords, links, linksMap, minor, sharp, chordDisplay, chordName;
+	var svg, zoomSlider;
 
 // // // // // // // // // // // // // // // // // // // // // // // // //
 
@@ -19,11 +19,6 @@
 
 // // // // // // // // // // // // // // // // // // // // // // // // //
 
-	function initChecks(event) {
-		minor.addEventListener('click', modifiers_Click)
-		sharp.addEventListener('click', modifiers_Click)
-	}
-
 	function initGlobals(event) {
 		linksChords = Utils.$('links-chords');
 		links = linksChords.getElementsByTagName('a');
@@ -34,8 +29,19 @@
 		}
 		minor = Utils.$('minor');
 		sharp = Utils.$('sharp');
+		chordDisplay = Utils.$('chord-display');
 		chordName = Utils.$('chord-name');
 		svg = Utils.$('svg');
+		zoomSlider = Utils.$('zoom-slider');
+	}
+
+	function initChecks(event) {
+		minor.addEventListener('click', modifiers_Click)
+		sharp.addEventListener('click', modifiers_Click)
+	}
+
+	function initZoom(event) {
+		zoomSlider.addEventListener('input', zoomSlider_Input);
 	}
 
 	function initHash(event) {
@@ -48,6 +54,10 @@
 	}
 
 // // // // // // // // // // // // // // // // // // // // // // // // //
+
+	function zoomSlider_Input(event) {
+		chordDisplay.style.zoom = zoomSlider.value + '%';
+	}
 
 	function modifiers_Click(event) {
 		var isMinor = minor.checked;
@@ -63,6 +73,7 @@
 	function window_Load(event) {
 		initGlobals(event);
 		initChecks(event);
+		initZoom(event);
 		initHash(event);
 	}
 
