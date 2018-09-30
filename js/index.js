@@ -15,6 +15,12 @@
 		}
 		var root = chord.substring(0, 1);
 		linksMap[root].setAttribute('class', 'current');
+		var notes = svg.getElementsByTagName('circle');
+		for (var j = 0 ; j < notes.length ; j++) {
+			var note = notes[j];
+			svg.removeChild(note);
+			j--;
+		}
 	}
 
 // // // // // // // // // // // // // // // // // // // // // // // // //
@@ -42,6 +48,7 @@
 
 	function initZoom(event) {
 		zoomSlider.addEventListener('input', zoomSlider_Input);
+		zoomSlider_Input(event);
 	}
 
 	function initHash(event) {
@@ -67,6 +74,15 @@
 		for (var i = 0 ; i < links.length ; i++) {
 			var link = links[i];
 			link.href = '#' + link.innerText + modifiers;
+		}
+		minor.parentNode.parentNode.setAttribute('class', isMinor ? 'current' : '');
+		sharp.parentNode.parentNode.setAttribute('class', isSharp ? 'current' : '');
+		for (var i = 0 ; i < links.length ; i++) {
+			var link = links[i];
+			if (link.getAttribute('class') == 'current') {
+				document.location.hash = link.getAttribute('href').substring(1);
+				break;
+			}
 		}
 	}
 
