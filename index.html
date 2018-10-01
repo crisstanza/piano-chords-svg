@@ -2,8 +2,9 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<link rel="icon" type="image/png" href="./img/piano-chords.png?v=1.0.0" />
+		<link rel="icon" type="image/png" href="./favicon.png?v=1.0.0" />
 		<link rel="stylesheet" type="text/css" media="all" href="./css/css.css?v=1.0.0" />
+		<script type="text/javascript" src="./js/CHORDS.js?v=1.0.0"></script>
 		<script type="text/javascript" src="./js/lib/Utils.js?v=1.0.0"></script>
 		<script type="text/javascript" src="./js/index.js?v=1.0.0"></script>
 		<title>Acordes para Piano e Teclado</title>
@@ -20,11 +21,16 @@
 				<a href="#Gm" title="sol">G</a> &nbsp;
 				<a href="#Am" title="l&aacute;">A</a> &nbsp;
 				<a href="#Bm" title="si">B</a> &nbsp; &nbsp;
-				<label class="current"><span><input type="checkbox" id="minor" checked="checked" /></span>menor</label>
 				<label><span><input type="checkbox" id="sharp" /></span>sustenido</label>
+				<label class="current"><span><input type="checkbox" id="minor" checked="checked" /></span>menor</label>
 			</div>
 			<br />
-			<input title="zoom" type="range" min="100" max="200" value="150" id="zoom-slider" /><br />
+			<br />
+			<div>
+				<img border="0" src="./img/zoom-out.png" width="24" height="24" class="ico-zoom-out" id="bt-zoom-out" /> &nbsp;
+				<input title="zoom" type="range" min="100" max="200" value="150" id="zoom-slider" />
+				&nbsp; <img border="0" src="./img/zoom-in.png" width="24" height="24" class="ico-zoom-in" id="bt-zoom-in" />
+			</div>
 			<br />
 			<fieldset id="chord-display" class="center">
 				<legend id="chord-name">Cm</legend>

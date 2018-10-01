@@ -50,3 +50,14 @@ fieldset, legend {
 .chords > label > span {
 	display: inline-grid;
 }
+
+.ico-zoom-out, .ico-zoom-in {
+	opacity: 0.6;
+	cursor: pointer;
+	position: relative;
+	top: 4px;
+}
+
+input[type=range] {
+	width: 200px;
+}

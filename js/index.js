@@ -1,7 +1,6 @@
 (function() {
 
-	var linksChords, links, linksMap, minor, sharp, chordDisplay, chordName;
-	var svg, zoomSlider;
+	var linksChords, links, linksMap, minor, sharp, chordDisplay, chordName, svg, btZoomOut, btZoomIn, zoomSlider;
 
 // // // // // // // // // // // // // // // // // // // // // // // // //
 
@@ -15,11 +14,50 @@
 		}
 		var root = chord.substring(0, 1);
 		linksMap[root].setAttribute('class', 'current');
+		//
 		var notes = svg.getElementsByTagName('circle');
 		for (var j = 0 ; j < notes.length ; j++) {
 			var note = notes[j];
 			svg.removeChild(note);
 			j--;
+		}
+		//
+		if (chord.indexOf('#') > 0) {
+			sharp.checked = true;
+			sharp.parentNode.parentNode.setAttribute('class', 'current');
+		} else {
+			sharp.checked = false;
+			sharp.parentNode.parentNode.setAttribute('class', '');
+		}
+		if (chord.indexOf('m') > 0) {
+			minor.checked = true;
+			minor.parentNode.parentNode.setAttribute('class', 'current');
+		} else {
+			minor.checked = false;
+			minor.parentNode.parentNode.setAttribute('class', '');
+		}
+		//
+		var keys = CHORDS[chord];
+		if (keys) {
+			for (var k = 0 ; k < keys.length ; k++) {
+				var key = keys[k];
+				var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+				circle.setAttribute('r', '5');
+				if (key > 0) {
+					circle.setAttribute('name', 'w');
+					circle.setAttribute('cx', 18 + 21 * (key - 1));
+					circle.setAttribute('cy', 92);
+					circle.setAttribute('stroke', '#000');
+					circle.setAttribute('fill', '#FFF');
+				} else if (key < 0) {
+					circle.setAttribute('name', 'b');
+					circle.setAttribute('cx', 7 + 21 * (-key - 1));
+					circle.setAttribute('cy', 66);
+					circle.setAttribute('stroke', '#FFF');
+					circle.setAttribute('fill', '#444');
+				}
+				svg.appendChild(circle);
+			}
 		}
 	}
 
@@ -33,20 +71,24 @@
 			var link = links[i];
 			linksMap[link.innerText] = link;
 		}
-		minor = Utils.$('minor');
 		sharp = Utils.$('sharp');
+		minor = Utils.$('minor');
 		chordDisplay = Utils.$('chord-display');
 		chordName = Utils.$('chord-name');
 		svg = Utils.$('svg');
+		btZoomOut = Utils.$('bt-zoom-out');
+		btZoomIn = Utils.$('bt-zoom-in');
 		zoomSlider = Utils.$('zoom-slider');
 	}
 
 	function initChecks(event) {
-		minor.addEventListener('click', modifiers_Click)
-		sharp.addEventListener('click', modifiers_Click)
+		sharp.addEventListener('click', modifiers_Click);
+		minor.addEventListener('click', modifiers_Click);
 	}
 
 	function initZoom(event) {
+		btZoomOut.addEventListener('click', btZoomOut_Click);
+		btZoomIn.addEventListener('click', btZoomIn_Click);
 		zoomSlider.addEventListener('input', zoomSlider_Input);
 		zoomSlider_Input(event);
 	}
@@ -67,16 +109,16 @@
 	}
 
 	function modifiers_Click(event) {
-		var isMinor = minor.checked;
 		var isSharp = sharp.checked;
-		var modifiers = isMinor ? 'm' : '';
-		modifiers += isSharp ? '#' : '';
+		var isMinor = minor.checked;
+		var modifiers = isSharp ? '#' : '';
+		modifiers += isMinor ? 'm' : '';
 		for (var i = 0 ; i < links.length ; i++) {
 			var link = links[i];
 			link.href = '#' + link.innerText + modifiers;
 		}
-		minor.parentNode.parentNode.setAttribute('class', isMinor ? 'current' : '');
 		sharp.parentNode.parentNode.setAttribute('class', isSharp ? 'current' : '');
+		minor.parentNode.parentNode.setAttribute('class', isMinor ? 'current' : '');
 		for (var i = 0 ; i < links.length ; i++) {
 			var link = links[i];
 			if (link.getAttribute('class') == 'current') {
@@ -84,6 +126,16 @@
 				break;
 			}
 		}
+	}
+
+	function btZoomOut_Click(event) {
+		zoomSlider.value = zoomSlider.value * 1 - 10;
+		zoomSlider_Input(event);
+	}
+
+	function btZoomIn_Click(event) {
+		zoomSlider.value = zoomSlider.value * 1 + 10;
+		zoomSlider_Input(event);
 	}
 
 	function window_Load(event) {
