@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" media="all" href="./css/css.css?v=1.0.0" />
 		<script type="text/javascript" src="./js/CHORDS.js?v=1.0.0"></script>
 		<script type="text/javascript" src="./js/lib/Utils.js?v=1.0.0"></script>
+		<script type="text/javascript" src="./js/lib/Utils.UnRadio.js?v=1.0.0"></script>
 		<script type="text/javascript" src="./js/index.js?v=1.0.0"></script>
 		<title>Acordes para Piano e Teclado.</title>
 	</head>
@@ -26,25 +27,25 @@
 				<label class="current"><span><input type="checkbox" id="minor" checked="checked" /></span>menor</label>
 			</div>
 			<br />
-			<div id="links-roots" class="roots">
-				<label><span><input type="checkbox" id="_C" /></span>C</label> &nbsp;
-				<label><span><input type="checkbox" id="_D" /></span>D</label> &nbsp;
-				<label><span><input type="checkbox" id="_E" /></span>E</label> &nbsp;
-				<label><span><input type="checkbox" id="_F" /></span>F</label> &nbsp;
-				<label><span><input type="checkbox" id="_G" /></span>G</label> &nbsp;
-				<label><span><input type="checkbox" id="_A" /></span>A</label> &nbsp;
-				<label><span><input type="checkbox" id="_B" /></span>B</label> &nbsp;
-				<label><span><input type="checkbox" id="root-sharp" /></span>#</label> &nbsp;
+			<div id="checks-roots" class="roots">
+				<label><input type="radio" name="other-root" id="_C" />C</label> &nbsp;
+				<label><input type="radio" name="other-root" id="_D" />D</label> &nbsp;
+				<label><input type="radio" name="other-root" id="_E" />E</label> &nbsp;
+				<label><input type="radio" name="other-root" id="_F" />F</label> &nbsp;
+				<label><input type="radio" name="other-root" id="_G" />G</label> &nbsp;
+				<label><input type="radio" name="other-root" id="_A" />A</label> &nbsp;
+				<label><input type="radio" name="other-root" id="_B" />B</label> &nbsp;
+				<label><input type="checkbox" id="root-sharp" />#</label> &nbsp;
 			</div>
 			<br />
-			<div id="links-variations" class="variations">
-				<label><span><input type="checkbox" id="_4" /></span>4</label> &nbsp;
-				<label><span><input type="checkbox" id="_7" /></span>7</label> &nbsp;
-				<label><span><input type="checkbox" id="_7M" /></span>7+</label> &nbsp;
-				<label><span><input type="checkbox" id="_9" /></span>9</label> &nbsp;
-				<label><span><input type="checkbox" id="_9M" /></span>9+</label> &nbsp;
-				<label><span><input type="checkbox" id="_13b" /></span>13b</label> &nbsp;
-				<label><span><input type="checkbox" id="_dim" /></span>&ordm;</label> &nbsp;
+			<div id="checks-variations" class="variations">
+				<label><input type="checkbox" id="_4" />4</label> &nbsp;
+				<label><input type="checkbox" id="_7" />7</label> &nbsp;
+				<label><input type="checkbox" id="_7M" />7+</label> &nbsp;
+				<label><input type="checkbox" id="_9" />9</label> &nbsp;
+				<label><input type="checkbox" id="_9M" />9+</label> &nbsp;
+				<label><input type="checkbox" id="_13b" />13b</label> &nbsp;
+				<label><input type="checkbox" id="_dim" />&ordm;</label> &nbsp;
 			</div>
 			<br />
 			<br />

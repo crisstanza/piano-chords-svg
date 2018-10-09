@@ -1,6 +1,6 @@
 (function() {
 
-	var linksChords, links, linksMap, minor, sharp, chordDisplay, chordName, svg, btZoomOut, btZoomIn, zoomSlider;
+	var linksChords, links, linksMap, sharp, minor, rootSharp, checksVariations, variations, chordDisplay, chordName, svg, btZoomOut, btZoomIn, zoomSlider;
 
 // // // // // // // // // // // // // // // // // // // // // // // // //
 
@@ -73,6 +73,9 @@
 		}
 		sharp = Utils.$('sharp');
 		minor = Utils.$('minor');
+		rootSharp = Utils.$('root-sharp');
+		checksVariations = Utils.$('checks-variations');
+		variations = checksVariations.querySelectorAll('input[type=checkbox]');
 		chordDisplay = Utils.$('chord-display');
 		chordName = Utils.$('chord-name');
 		svg = Utils.$('svg');
@@ -138,16 +141,16 @@
 		zoomSlider_Input(event);
 	}
 
+	function window_HashChange(event) {
+		var hash = document.location.hash;
+		loadChord(hash);
+	}
+
 	function window_Load(event) {
 		initGlobals(event);
 		initChecks(event);
 		initZoom(event);
 		initHash(event);
-	}
-
-	function window_HashChange(event) {
-		var hash = document.location.hash;
-		loadChord(hash);
 	}
 
 // // // // // // // // // // // // // // // // // // // // // // // // //
