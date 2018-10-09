@@ -12,7 +12,7 @@
 	</head>
 	<body>
 		<div class="center">
-			<a href="." class="lowlight"><h1>Acordes para Piano e Teclado</h1></a><br />
+			<a href="." class="lowlight _display-none"><h1>Acordes para Piano e Teclado</h1></a><br />
 			<br />
 			<div id="links-chords" class="chords">
 				<a href="#Cm" title="d&oacute; menor" class="current">C</a> &nbsp;
@@ -26,6 +26,27 @@
 				<label class="current"><span><input type="checkbox" id="minor" checked="checked" /></span>menor</label>
 			</div>
 			<br />
+			<div id="links-roots" class="roots">
+				<label><span><input type="checkbox" id="_C" /></span>C</label> &nbsp;
+				<label><span><input type="checkbox" id="_D" /></span>D</label> &nbsp;
+				<label><span><input type="checkbox" id="_E" /></span>E</label> &nbsp;
+				<label><span><input type="checkbox" id="_F" /></span>F</label> &nbsp;
+				<label><span><input type="checkbox" id="_G" /></span>G</label> &nbsp;
+				<label><span><input type="checkbox" id="_A" /></span>A</label> &nbsp;
+				<label><span><input type="checkbox" id="_B" /></span>B</label> &nbsp;
+				<label><span><input type="checkbox" id="root-sharp" /></span>#</label> &nbsp;
+			</div>
+			<br />
+			<div id="links-variations" class="variations">
+				<label><span><input type="checkbox" id="_4" /></span>4</label> &nbsp;
+				<label><span><input type="checkbox" id="_7" /></span>7</label> &nbsp;
+				<label><span><input type="checkbox" id="_7M" /></span>7+</label> &nbsp;
+				<label><span><input type="checkbox" id="_9" /></span>9</label> &nbsp;
+				<label><span><input type="checkbox" id="_9M" /></span>9+</label> &nbsp;
+				<label><span><input type="checkbox" id="_13b" /></span>13b</label> &nbsp;
+				<label><span><input type="checkbox" id="_dim" /></span>&ordm;</label> &nbsp;
+			</div>
+			<br />
 			<br />
 			<div>
 				<img border="0" src="./img/zoom-out.png" width="24" height="24" class="ico-zoom-out" id="bt-zoom-out" /> &nbsp;
@@ -33,7 +54,7 @@
 				&nbsp; <img border="0" src="./img/zoom-in.png" width="24" height="24" class="ico-zoom-in" id="bt-zoom-in" />
 			</div>
 			<br />
-			<fieldset id="chord-display" class="center">
+			<fieldset id="chord-display" class="center _display-none">
 				<legend id="chord-name">Cm</legend>
 				<svg id="svg" width="386" height="101">
 					<rect name="w" x="7" y="0" width="21" height="101" stroke="#000" fill="#F7F4F1" />
