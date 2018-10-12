@@ -1,12 +1,42 @@
 (function() {
 
-	var linksChords, links, linksMap, sharp, minor, rootSharp, checksVariations, variations, chordDisplay, chordName, svg, btZoomOut, btZoomIn, zoomSlider;
+	var linksChords, links, linksMap, sharp, minor, checksVariations, variations, checksOtherRoots, otherRoots, otherRootSharp, chordDisplay, chordName, svg, btZoomOut, btZoomIn, zoomSlider;
+
+// // // // // // // // // // // // // // // // // // // // // // // // //
+
+	function isSharpChord(chord) {
+		var index = chord.indexOf('#');
+		return index == 1;
+	}
+	function isSharpRootChord(chord) {
+		var index = chord.indexOf('#');
+		return index > 1;
+	}
+	function isVariationChord(chord, variation) {
+		var index = chord.indexOf((isSlashVariation(variation) ? '/' : '') + variation);
+		var variationLastChar = variation.charAt(variation.length - 1);
+		if (variationLastChar == '+') {
+			var next = chord.charAt(index + variation.length);
+			return index >= 0 && next == '+';
+		} else {
+			var next = chord.charAt(index + variation.length + 1);
+			return index >= 0 && next != '+';
+		}
+	}
+	function isOtherRootChord(chord, otherRoot) {
+		var index = chord.indexOf('/' + otherRoot);
+		return index >= 0;
+	}
+	function isSlashVariation(variation) {
+		return variation && variation != '\xB0';
+	}
 
 // // // // // // // // // // // // // // // // // // // // // // // // //
 
 	function loadChord(hash) {
+		hash = decodeURIComponent(hash);
 		var chord = hash.substring(1);
-		chordName.innerText = chord;
+		chordName.innerHTML = chord;
 		//
 		for (var i = 0 ; i < links.length ; i++) {
 			var link = links[i];
@@ -22,7 +52,7 @@
 			j--;
 		}
 		//
-		if (chord.indexOf('#') > 0) {
+		if (isSharpChord(chord)) {
 			sharp.checked = true;
 			sharp.parentNode.parentNode.setAttribute('class', 'current');
 		} else {
@@ -35,6 +65,18 @@
 		} else {
 			minor.checked = false;
 			minor.parentNode.parentNode.setAttribute('class', '');
+		}
+		otherRootSharp.checked = isSharpRootChord(chord);
+		//
+		for (var i = 0 ; i < variations.length ; i++) {
+			var variation = variations[i];
+			var name = variation.parentNode.innerText;
+			variation.checked = isVariationChord(chord, name);
+		}
+		for (var i = 0 ; i < otherRoots.length ; i++) {
+			var otherRoot = otherRoots[i];
+			var name = otherRoot.parentNode.innerText;
+			otherRoot.checked = isOtherRootChord(chord, name);
 		}
 		//
 		var keys = CHORDS[chord];
@@ -73,9 +115,11 @@
 		}
 		sharp = Utils.$('sharp');
 		minor = Utils.$('minor');
-		rootSharp = Utils.$('root-sharp');
 		checksVariations = Utils.$('checks-variations');
 		variations = checksVariations.querySelectorAll('input[type=checkbox]');
+		checksOtherRoots = Utils.$('checks-other-roots');
+		otherRoots = checksOtherRoots.querySelectorAll('input[type=radio]');
+		otherRootSharp = Utils.$('other-root-sharp');
 		chordDisplay = Utils.$('chord-display');
 		chordName = Utils.$('chord-name');
 		svg = Utils.$('svg');
@@ -87,6 +131,15 @@
 	function initChecks(event) {
 		sharp.addEventListener('click', modifiers_Click);
 		minor.addEventListener('click', modifiers_Click);
+		for (var i = 0 ; i < variations.length ; i++) {
+			var variation = variations[i];
+			variation.addEventListener('click', modifiers_Click);
+		}
+		for (var i = 0 ; i < otherRoots.length ; i++) {
+			var otherRoot = otherRoots[i];
+			otherRoot.addEventListener('click', modifiers_Click);
+		}
+		otherRootSharp.addEventListener('click', modifiers_Click);
 	}
 
 	function initZoom(event) {
@@ -116,6 +169,22 @@
 		var isMinor = minor.checked;
 		var modifiers = isSharp ? '#' : '';
 		modifiers += isMinor ? 'm' : '';
+		for (var i = 0 ; i < variations.length ; i++) {
+			var variation = variations[i];
+			if (variation.checked) {
+				var name = variation.parentNode.innerText;
+				var usesSlash = isSlashVariation(name);
+				modifiers += (usesSlash ? '/' : '') + name;
+			}
+		}
+		for (var i = 0 ; i < otherRoots.length ; i++) {
+			var otherRoot = otherRoots[i];
+			if (otherRoot.checked) {
+				modifiers += '/' + otherRoot.parentNode.innerText;
+				var isOtherRootSharp = otherRootSharp.checked;
+				modifiers += isOtherRootSharp ? '#' : '';
+			}
+		}
 		for (var i = 0 ; i < links.length ; i++) {
 			var link = links[i];
 			link.href = '#' + link.innerText + modifiers;
@@ -145,6 +214,8 @@
 		var hash = document.location.hash;
 		loadChord(hash);
 	}
+
+// // // // // // // // // // // // // // // // // // // // // // // // //
 
 	function window_Load(event) {
 		initGlobals(event);

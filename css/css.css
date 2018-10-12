@@ -4,6 +4,7 @@
 }
 *:not(pre) { font-family: Roboto, sans-serif; }
 *:not(h1) { font-size: 17pt; }
+pre a { font-family: inherit; }
 
 h1 { color: #4B1B79; letter-spacing: 2px; }
 a:hover h1 { text-decoration: underline; }

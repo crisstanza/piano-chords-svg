@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<div class="center">
-			<a href="." class="lowlight _display-none"><h1>Acordes para Piano e Teclado</h1></a><br />
+			<a href="." class="lowlight"><h1>Acordes para Piano e Teclado</h1></a><br />
 			<br />
 			<div id="links-chords" class="chords">
 				<a href="#Cm" title="d&oacute; menor" class="current">C</a> &nbsp;
@@ -27,25 +27,25 @@
 				<label class="current"><span><input type="checkbox" id="minor" checked="checked" /></span>menor</label>
 			</div>
 			<br />
-			<div id="checks-roots" class="roots">
-				<label><input type="radio" name="other-root" id="_C" />C</label> &nbsp;
-				<label><input type="radio" name="other-root" id="_D" />D</label> &nbsp;
-				<label><input type="radio" name="other-root" id="_E" />E</label> &nbsp;
-				<label><input type="radio" name="other-root" id="_F" />F</label> &nbsp;
-				<label><input type="radio" name="other-root" id="_G" />G</label> &nbsp;
-				<label><input type="radio" name="other-root" id="_A" />A</label> &nbsp;
-				<label><input type="radio" name="other-root" id="_B" />B</label> &nbsp;
-				<label><input type="checkbox" id="root-sharp" />#</label> &nbsp;
+			<div id="checks-variations">
+				<label><input type="checkbox" />4</label> &nbsp;
+				<label><input type="checkbox" />7</label> &nbsp;
+				<label><input type="checkbox" />7+</label> &nbsp;
+				<label><input type="checkbox" />9</label> &nbsp;
+				<label><input type="checkbox" />9+</label> &nbsp;
+				<label><input type="checkbox" />13b</label> &nbsp;
+				<label><input type="checkbox" />&deg;</label> &nbsp;
 			</div>
 			<br />
-			<div id="checks-variations" class="variations">
-				<label><input type="checkbox" id="_4" />4</label> &nbsp;
-				<label><input type="checkbox" id="_7" />7</label> &nbsp;
-				<label><input type="checkbox" id="_7M" />7+</label> &nbsp;
-				<label><input type="checkbox" id="_9" />9</label> &nbsp;
-				<label><input type="checkbox" id="_9M" />9+</label> &nbsp;
-				<label><input type="checkbox" id="_13b" />13b</label> &nbsp;
-				<label><input type="checkbox" id="_dim" />&ordm;</label> &nbsp;
+			<div id="checks-other-roots">
+				<label><input type="radio" name="other-root" />C</label> &nbsp;
+				<label><input type="radio" name="other-root" />D</label> &nbsp;
+				<label><input type="radio" name="other-root" />E</label> &nbsp;
+				<label><input type="radio" name="other-root" />F</label> &nbsp;
+				<label><input type="radio" name="other-root" />G</label> &nbsp;
+				<label><input type="radio" name="other-root" />A</label> &nbsp;
+				<label><input type="radio" name="other-root" />B</label> &nbsp;
+				<label><input type="checkbox" id="other-root-sharp" />#</label> &nbsp;
 			</div>
 			<br />
 			<br />
@@ -55,7 +55,7 @@
 				&nbsp; <img border="0" src="./img/zoom-in.png" width="24" height="24" class="ico-zoom-in" id="bt-zoom-in" />
 			</div>
 			<br />
-			<fieldset id="chord-display" class="center _display-none">
+			<fieldset id="chord-display" class="center">
 				<legend id="chord-name">Cm</legend>
 				<svg id="svg" width="386" height="101">
 					<rect name="w" x="7" y="0" width="21" height="101" stroke="#000" fill="#F7F4F1" />
@@ -94,9 +94,16 @@
 					<circle name="w" cx="122" cy="92" r="5" stroke="#000" fill="#FFF" />
 				</svg>
 			</fieldset>
-			<br />
-			<br />
-			<br />
+		</div>
+		<br />
+		<br />
+		<div>
+			<h2>M&uacute;sicas</h2>
+			<ul>
+				<li><a href="./guilherme-arantes_um-dia-um-adeus.html" target="_guilherme-arantes_um-dia-um-adeus">Guilherme Arantes - Um Dia, Um Adeus</a></li>
+			</ul>
+		</div>
+		<div class="center">
 			<br />
 			<a title="c&oacute;digo-fonte" target="_blank" href="https://github.com/crisstanza/piano-chords-svg"><img border="0" src="./img/github.png" width="24" height="24" class="github-icon" /></a><br />
 		</div>
