@@ -21,7 +21,9 @@
 
 	function link_Click(event) {
 		var link = event.target
-		parent.location.hash = link.innerText;
+		if (parent) {
+			parent.location.hash = link.innerText;
+		}
 	}
 
 // // // // // // // // // // // // // // // // // // // // // // // // //

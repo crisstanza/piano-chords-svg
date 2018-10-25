@@ -29,3 +29,4 @@ Links:
     https://www.8notes.com/piano_chord_chart/e.asp
     https://www.pianochord.org/e-extended.html
     https://www.cifraclub.com.br/kleiton-e-kledir/paixao/
+    https://www.cifraclub.com.br/elton-john/nikita/

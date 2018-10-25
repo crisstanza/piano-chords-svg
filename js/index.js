@@ -37,6 +37,7 @@
 		hash = decodeURIComponent(hash);
 		var chord = hash.substring(1);
 		chordName.innerHTML = chord;
+		document.title = chord;
 		//
 		for (var i = 0 ; i < links.length ; i++) {
 			var link = links[i];
