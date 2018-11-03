@@ -9,7 +9,7 @@
 		return index == 1;
 	}
 	function isSharpRootChord(chord) {
-		var index = chord.indexOf('#');
+		var index = chord.lastIndexOf('#');
 		return index > 1;
 	}
 	function isVariationChord(chord, variation) {
@@ -77,7 +77,10 @@
 		for (var i = 0 ; i < otherRoots.length ; i++) {
 			var otherRoot = otherRoots[i];
 			var name = otherRoot.parentNode.innerText;
-			otherRoot.checked = isOtherRootChord(chord, name);
+			if (isOtherRootChord(chord, name)) {
+				otherRoot.checked = true;
+			}
+			otherRoot.setAttribute('data-click', otherRoot.checked);
 		}
 		//
 		var keys = CHORDS[chord];
