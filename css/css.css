@@ -1,10 +1,15 @@
+@font-face {
+	font-family: DigitalDismay;
+	src: url("../fonts/Digital-Dismay.otf") format("opentype");
+}
+
 * {
 	box-sizing: inherit;
 	color: #444;
 }
 *:not(pre) { font-family: Roboto, sans-serif; }
 *:not(h1) { font-size: 14pt; }
-pre a { font-family: inherit; }
+pre a, pre b { font-family: inherit; }
 
 h1 { color: #4B1B79; letter-spacing: 2px; }
 a:hover h1 { text-decoration: underline; }
@@ -17,6 +22,7 @@ label.current, a.current, a:hover { text-decoration: underline; color: #D91313; 
 
 .center { margin: auto; }
 div.center { text-align: center; }
+table.center { margin: auto; }
 
 .display-none { display: none; }
 .visibility-hidden { visibility: hidden; }
@@ -65,3 +71,21 @@ input[type=range] {
 }
 
 .HIDE { display: none !important; }
+
+.display {
+	font-family: DigitalDismay;
+	font-size: 2em;
+	letter-spacing: 3px;
+	color: #101010;
+	background-color: #A7B7AE;
+	padding: 3px 12px 0px 16px;
+	border: 3px solid #8C8C8C;
+	opacity: 0.9;
+}
+
+.metronome {
+    width: 40px;
+    height: 40px;
+    opacity: 0.2;
+    vertical-align: middle;
+}
