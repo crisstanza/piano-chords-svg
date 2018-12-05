@@ -11,6 +11,8 @@
 		musicLinks = musicPre.querySelectorAll('a');
 		metronome = {
 			beat: null,
+			beatNotes: null,
+			beatNote: null,
 			audioContext: null,
 			SOUND_1: null,
 			SOUND_4: null,
@@ -35,12 +37,13 @@
 				metronome.display.innerText--;
 			},
 			start: function(event) {
-				metronome.beat = 0;
+				metronome.beat = -4;
+				metronome.beatNote = 0;
 				metronome.play();
 				METRONOME = setInterval(
 					function() {
 						metronome.play();
-					}, (60000 / metronome.display.innerText)/2
+					}, 60000 / (metronome.display.innerText*1)
 				);
 			},
 			stop: function(event) {
@@ -48,28 +51,28 @@
 			},
 			play: function() {
 				var bufferSource = metronome.audioContext.createBufferSource();
-				bufferSource.buffer = null
-				if (metronome.beat <= 7) {
+				bufferSource.buffer = null;
+				if (metronome.beat < 0) {
+					bufferSource.buffer = metronome.SOUND_4;
+					metronome.beat += 1;
+				} else {
+					// var noteNode = metronome.beatNotes[metronome.beatNote];
+					// var note = noteNode.innerText;
 					if (metronome.beat % 2 == 0) {
+						bufferSource.buffer = metronome.SOUND_1;
+					} else {
 						bufferSource.buffer = metronome.SOUND_4;
 					}
-				} else if (metronome.beat % 4 == 0) {
-					bufferSource.buffer = metronome.SOUND_1;
-				} else if ((metronome.beat + 2) % 4 == 0) {
-					bufferSource.buffer = metronome.SOUND_4;
-				} else if (metronome.beat == 23) {
-					bufferSource.buffer = metronome.SOUND_4;
-				} else if (metronome.beat == 55) {
-					bufferSource.buffer = metronome.SOUND_4;
-				} else {
+					// metronome.beatNote++;
+					metronome.beat += 1;
 				}
 				if (bufferSource.buffer != null) {
 					bufferSource.connect(metronome.audioContext.destination);
 					bufferSource.start();
 				}
-	    	    metronome.beat++;
 			},
 			init: function(event) {
+				metronome.beatNotes = document.getElementById('music-pre').querySelectorAll('a');
 				metronome.audioContext = new AudioContext() || new webkitAudioContext();
 				function onDecoded_1(buffer) {
 					metronome.SOUND_1 = buffer;
