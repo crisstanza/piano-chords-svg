@@ -81,14 +81,14 @@
 					metronome.SOUND_4 = buffer;
 				}
 				var request_1 = new XMLHttpRequest();
-				request_1.open('GET', './audio/_1.mp3', true);
+				request_1.open('GET', './audio/_1.wav', true);
 				request_1.responseType = 'arraybuffer';
 				request_1.onload = function() {
 					metronome.audioContext.decodeAudioData(request_1.response, onDecoded_1);
 				};
 				request_1.send();
 				var request_4 = new XMLHttpRequest();
-				request_4.open('GET', './audio/_4.mp3', true);
+				request_4.open('GET', './audio/_4.wav', true);
 				request_4.responseType = 'arraybuffer';
 				request_4.onload = function() {
 					metronome.audioContext.decodeAudioData(request_4.response, onDecoded_4);
