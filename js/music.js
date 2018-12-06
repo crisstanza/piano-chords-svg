@@ -82,7 +82,7 @@
 				}
 				function loadAudio(note) {
 					var request = new XMLHttpRequest();
-					request.open('GET', './audio/_' + note + '.wav', true);
+					request.open('GET', './audio/_' + note + '.wav.dat', true);
 					request.responseType = 'arraybuffer';
 					request.onload = function() {
 						metronome.audioContext.decodeAudioData(request.response, function(buffer) { onDecoded(buffer, note); });
