@@ -57,9 +57,14 @@
 						bufferSource.buffer = metronome.SOUNDS[4];
 					}
 				} else {
-					var note = metronome.beatNotes[metronome.beat].replace(/\/\*.*\*\//, '');
-					if (note != 0) {
-						bufferSource.buffer = metronome.SOUNDS[note*1];
+					var beatNote = metronome.beatNotes[metronome.beat];
+					if (beatNote) {
+						var note = beatNote.replace(/\/\*.*\*\//, '');
+						if (note != 0) {
+							bufferSource.buffer = metronome.SOUNDS[note*1];
+						}
+					} else {
+						metronome.btPlay_Click({target: Utils.$('bt-play')});
 					}
 				}
 				if (bufferSource.buffer != null) {
