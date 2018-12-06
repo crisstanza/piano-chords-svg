@@ -14,8 +14,7 @@
 			beatNotes: null,
 			beatNote: null,
 			audioContext: null,
-			SOUND_1: null,
-			SOUND_4: null,
+			SOUNDS: null,
 			display: Utils.$('metronome-display'),
 			btUspeedUp: Utils.$('bt-speed-up'),
 			btSpeedDown: Utils.$('bt-speed-down'),
@@ -37,13 +36,14 @@
 				metronome.display.innerText--;
 			},
 			start: function(event) {
-				metronome.beat = -4;
+				var MUL = 2;
+				metronome.beat = -4 * MUL;
 				metronome.beatNote = 0;
 				metronome.play();
 				METRONOME = setInterval(
 					function() {
 						metronome.play();
-					}, 60000 / (metronome.display.innerText*1)
+					}, 60000 / (metronome.display.innerText * MUL)
 				);
 			},
 			stop: function(event) {
@@ -53,47 +53,41 @@
 				var bufferSource = metronome.audioContext.createBufferSource();
 				bufferSource.buffer = null;
 				if (metronome.beat < 0) {
-					bufferSource.buffer = metronome.SOUND_4;
-					metronome.beat += 1;
-				} else {
-					// var noteNode = metronome.beatNotes[metronome.beatNote];
-					// var note = noteNode.innerText;
 					if (metronome.beat % 2 == 0) {
-						bufferSource.buffer = metronome.SOUND_1;
-					} else {
-						bufferSource.buffer = metronome.SOUND_4;
+						bufferSource.buffer = metronome.SOUNDS[4];
 					}
-					// metronome.beatNote++;
-					metronome.beat += 1;
+				} else {
+					var note = metronome.beatNotes[metronome.beat].replace(/\/\*.*\*\//, '');
+					if (note != 0) {
+						bufferSource.buffer = metronome.SOUNDS[note*1];
+					}
 				}
 				if (bufferSource.buffer != null) {
 					bufferSource.connect(metronome.audioContext.destination);
 					bufferSource.start();
 				}
+				metronome.beat += 1;
 			},
 			init: function(event) {
-				metronome.beatNotes = document.getElementById('music-pre').querySelectorAll('a');
+				metronome.beatNotes = document.getElementById('music-pre').getAttribute('data-beats').split(',');
 				metronome.audioContext = new AudioContext() || new webkitAudioContext();
-				function onDecoded_1(buffer) {
-					metronome.SOUND_1 = buffer;
+				metronome.SOUNDS = [];
+				function onDecoded(buffer, note) {
+					metronome.SOUNDS[note] = buffer;
 				}
-				function onDecoded_4(buffer) {
-					metronome.SOUND_4 = buffer;
+				function loadAudio(note) {
+					var request = new XMLHttpRequest();
+					request.open('GET', './audio/_' + note + '.wav', true);
+					request.responseType = 'arraybuffer';
+					request.onload = function() {
+						metronome.audioContext.decodeAudioData(request.response, function(buffer) { onDecoded(buffer, note); });
+					};
+					request.send();
 				}
-				var request_1 = new XMLHttpRequest();
-				request_1.open('GET', './audio/_1.wav', true);
-				request_1.responseType = 'arraybuffer';
-				request_1.onload = function() {
-					metronome.audioContext.decodeAudioData(request_1.response, onDecoded_1);
-				};
-				request_1.send();
-				var request_4 = new XMLHttpRequest();
-				request_4.open('GET', './audio/_4.wav', true);
-				request_4.responseType = 'arraybuffer';
-				request_4.onload = function() {
-					metronome.audioContext.decodeAudioData(request_4.response, onDecoded_4);
-				};
-				request_4.send();
+				loadAudio(1);
+				loadAudio(4);
+				loadAudio(8);
+				loadAudio(10);
 			}
 		};
 		metronome.init(event);
