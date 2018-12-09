@@ -12,8 +12,8 @@
 	</head>
 	<body>
 		<div class="center">
-			<a href="./u2_i-still-havent-found-what-im-looking-for.html" class="lowlight"><h2>U2 - I Still Haven't Found What I'm Looking For</h2></a>
-      <table class="center" border="0" cellpadding="4" cellspacing="0">
+			<a href="./u2_i-still-havent-found-what-im-looking-for.html" class="lowlight"><h2>U2 - I Still Haven't Found What I'm Looking For</h2></a><br />
+      <table class="floater-metronome" class="center" border="0" cellpadding="4" cellspacing="0">
         <tr>
             <td rowspan="2">
               <img src="./img/metronome.png" width="40" height="40" class="metronome" /></td> 
@@ -29,6 +29,7 @@
             </td>
             <td rowspan="2">
               <a href="#play" id="bt-play"><div class="arrow-right"></div></a>
+              <input id="metronome-display-current-beat" class="display-current-beat" value="" />
             </td>
         </tr>
         <tr>
@@ -40,56 +41,56 @@
 		</div>
 		<pre id="music-pre" data-beats="
         
-        1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,   /* intro */
+        1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8, /* intro */
         1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
 
 
-         1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0,   /* 1 */    /*    I have climbed...        */
-         1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,              /* ...I have run through...    */
-        10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,              /* ...be with you... only...   */
-        10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,              /* ...be with you              */
-
-         1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0,              /*    I have run...            */
-         1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,              /*    I have scaled...         */
-        10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0,              /*    ...these city walls      */
-        10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,              /* ...be with you              */
-
-
-        10, 0, 4, 0,  1, 0, 4, 0,   10, 0, 4, 0,  1, 0, 4, 8,   /* chorus */    /* But I still...         */
-        10, 0, 4, 0,  1, 0, 4, 0,    1, 0, 4, 0,  1, 0, 4, 8,                   /*   */
-        10, 0, 4, 0,  1, 0, 4, 0,   10, 0, 4, 0,  1, 0, 4, 0,                   /*   */
-        10, 0, 4, 0,  1, 0, 4, 0,    1, 0, 4, 0,  1, 0, 4, 8,                   /*   */
-
-
-         1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0,   /* 2 */
+         1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0, /* 1 */      /* I have climbed the highest mountains       */
          1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
         10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
         10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
 
-         1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0,
+         1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0,              /*    I have run... I have crawled            */
          1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
-        10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
+        10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0,
         10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
 
 
-        10, 0, 4, 0,  1, 0, 4, 0,   10, 0, 4, 0,  1, 0, 4, 8,   /* chorus */
+        10, 0, 4, 0,  1, 0, 4, 0,   10, 0, 4, 0,  1, 0, 4, 8, /* chorus */ /* But I still haven't found                  */
         10, 0, 4, 0,  1, 0, 4, 0,    1, 0, 4, 0,  1, 0, 4, 8,
         10, 0, 4, 0,  1, 0, 4, 0,   10, 0, 4, 0,  1, 0, 4, 0,
         10, 0, 4, 0,  1, 0, 4, 0,    1, 0, 4, 0,  1, 0, 4, 8,
 
 
-         1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0,   /* 3 */
+         1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0, /* 2 */      /* I have kissed honey lips                   */ 
          1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
         10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
         10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
 
-         1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0,
+         1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0,              /* I have spoke with the tongue of angels     */
          1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
         10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
         10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
 
 
-        10, 0, 4, 0,  1, 0, 4, 0,   10, 0, 4, 0,  1, 0, 4, 8,   /* chorus */
+        10, 0, 4, 0,  1, 0, 4, 0,   10, 0, 4, 0,  1, 0, 4, 8, /* chorus */
+        10, 0, 4, 0,  1, 0, 4, 0,    1, 0, 4, 0,  1, 0, 4, 8,
+        10, 0, 4, 0,  1, 0, 4, 0,   10, 0, 4, 0,  1, 0, 4, 0,
+        10, 0, 4, 0,  1, 0, 4, 0,    1, 0, 4, 0,  1, 0, 4, 8,
+
+
+         1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0, /* 3 */      /* I believe in the Kingdom Come              */
+         1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
+        10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
+        10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
+
+         1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 0,              /* You broke the bonds, you loosed the chains */
+         1, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
+        10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
+        10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
+
+
+        10, 0, 4, 0,  1, 0, 4, 0,   10, 0, 4, 0,  1, 0, 4, 8, /* chorus */
         10, 0, 4, 0,  1, 0, 4, 0,    1, 0, 4, 0,  1, 0, 4, 8,
         10, 0, 4, 0,  1, 0, 4, 0,   10, 0, 4, 0,  1, 0, 4, 0,
         10, 0, 4, 0,  1, 0, 4, 0,    1, 0, 4, 0,  1, 0, 4, 8,
@@ -97,7 +98,8 @@
         10, 0, 4, 0,  1, 0, 4, 0,   1, 0, 4, 0,   1, 0, 4, 8,
         10
 
-                                    "><a href="#">G</a>             <a href="#">.</a>             <a href="#">G</a>             <a href="#">.</a>     <a href="#">'</a>
+                                    ">
+<a href="#" title="0">G</a>             <a href="#">.</a>             <a href="#">G</a>             <a href="#">.</a>     <a href="#">'</a>
 <a href="#">G</a>             <a href="#">.</a>             <a href="#">G</a>             <a href="#">.</a>     <a href="#">'</a>
 
          <a href="#">G</a>    <a href="#">.</a>             <a href="#">G</a>             <a href="#">.</a>
@@ -110,19 +112,19 @@ Only to be with you
          <a href="#">G</a>   <a href="#">.</a>           <a href="#">G</a>                <a href="#">.</a>
 Only to be with you
 
-         <a href="#">G</a>    <a href="#">.</a>         <a href="#">G</a>                 <a href="#">.</a>
+         <a href="#" title="96">G</a>    <a href="#">.</a>         <a href="#">G</a>                 <a href="#">.</a>
  I have run... I have crawled
          <a href="#">G</a> <a href="#">.</a>             <a href="#">G</a>                <a href="#">.</a>
 I have scaled these city walls, these city walls
          <a href="#">C</a>        <a href="#">.</a>      <a href="#">C</a>                <a href="#">.</a>
 Only to be with you
 
-   <b>|</b>           <a href="#">D</a>  <a href="#">.</a>         <a href="#">C</a>       <a href="#">.</a>
+   <b>|</b>           <a href="#" title="160">D</a>  <a href="#">.</a>         <a href="#">C</a>       <a href="#">.</a>
 <b>2x |</b>   But I still haven't found
    <b>|</b>           <a href="#">G</a>            <a href="#">.</a>       <a href="#">G</a>     <a href="#">.</a>
    <b>|</b> What I'm looking for
 
-         <a href="#">G</a>    <a href="#">.</a>         <a href="#">G</a>                 <a href="#">.</a>
+         <a href="#" title="224">G</a>    <a href="#">.</a>         <a href="#">G</a>                 <a href="#">.</a>
 I have kissed honey lips
          <a href="#">G</a>    <a href="#">.</a>         <a href="#">G</a>                 <a href="#">.</a>
 Felt the healing in her fingertips
@@ -131,7 +133,7 @@ It burned like fire
          <a href="#">G</a>   <a href="#">.</a>           <a href="#">G</a>                <a href="#">.</a>
 This burning desire
 
-         <a href="#">G</a>   <a href="#">.</a>           <a href="#">G</a>                <a href="#">.</a>
+         <a href="#" title="288">G</a>   <a href="#">.</a>           <a href="#">G</a>                <a href="#">.</a>
 I have spoke with the tongue of angels
          <a href="#">G</a>   <a href="#">.</a>           <a href="#">G</a>                <a href="#">.</a>
 I have held the hand of a devil
@@ -140,12 +142,12 @@ It was warm in the night
          <a href="#">G</a>   <a href="#">.</a>           <a href="#">G</a>                <a href="#">.</a>
 I was cold as a stone
 
-   <b>|</b>           <a href="#">D</a>  <a href="#">.</a>         <a href="#">C</a>       <a href="#">.</a>
+   <b>|</b>           <a href="#" title="352">D</a>  <a href="#">.</a>         <a href="#">C</a>       <a href="#">.</a>
 <b>2x |</b>   But I still haven't found
    <b>|</b>           <a href="#">G</a>            <a href="#">.</a>       <a href="#">G</a>     <a href="#">.</a>
    <b>|</b> What I'm looking for
 
-         <a href="#">G</a>   <a href="#">.</a>           <a href="#">G</a>                <a href="#">.</a>
+         <a href="#" title="416">G</a>   <a href="#">.</a>           <a href="#">G</a>                <a href="#">.</a>
 I believe in the Kingdom Come
          <a href="#">G</a>   <a href="#">.</a>           <a href="#">G</a>                <a href="#">.</a>
 Then all the colors will bleed into one
@@ -154,7 +156,7 @@ Bleed into one
          <a href="#">G</a>   <a href="#">.</a>           <a href="#">G</a>                <a href="#">.</a>
 But yes I'm still running.
 
-         <a href="#">G</a>   <a href="#">.</a>           <a href="#">G</a>                <a href="#">.</a>
+         <a href="#" title="480">G</a>   <a href="#">.</a>           <a href="#">G</a>                <a href="#">.</a>
 You broke the bonds, you loosed the chains
          <a href="#">G</a>   <a href="#">.</a>           <a href="#">G</a>                <a href="#">.</a>
 You carried the cross of my shame
@@ -163,10 +165,13 @@ And my shame
          <a href="#">G</a>   <a href="#">.</a>           <a href="#">G</a>                <a href="#">.</a>
 You know I believed it
 
-   <b>|</b>           <a href="#">D</a>  <a href="#">.</a>         <a href="#">C</a>       <a href="#">.</a>
+   <b>|</b>           <a href="#" title="544">D</a>  <a href="#">.</a>         <a href="#">C</a>       <a href="#">.</a>
 <b>2x |</b>   But I still haven't found
    <b>|</b>           <a href="#">G</a>            <a href="#">.</a>       <a href="#">G</a>     <a href="#">.</a>
-   <b>|</b> What I'm looking for</pre>
+   <b>|</b> What I'm looking for
+
+<a href="#" title="608">G</a>             <a href="#">.</a>             <a href="#">G</a>             <a href="#">.</a>     <a href="#">'</a>
+<a href="#" title="624">G</a></pre>
 		<div class="center">
 			<br />
 			<a title="c&oacute;digo-fonte" target="_blank" href="https://github.com/crisstanza/piano-chords-svg"><img border="0" src="./img/github.png" width="24" height="24" class="github-icon" /></a><br />

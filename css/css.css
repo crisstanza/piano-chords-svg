@@ -18,6 +18,8 @@ body { margin: 20px; background-color: #F3FbF3; }
 body.music { line-height: 90%; }
 
 a { text-decoration: none; color: #A52A2A; }
+a[title] { color: #BD3232; text-decoration: overline; }
+
 label.current, a.current, a:hover { text-decoration: underline; color: #D91313; }
 
 .center { margin: auto; }
@@ -88,4 +90,17 @@ input[type=range] {
     height: 40px;
     opacity: 0.2;
     vertical-align: middle;
+}
+
+.display-current-beat {
+	font-family: DigitalDismay;
+    margin-top: 5px;
+	width: 30px;
+	height: 22px;
+	font-size: 0.9em;
+}
+
+table.floater-metronome {
+	position: fixed;
+	left: 595px;
 }
