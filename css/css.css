@@ -18,7 +18,7 @@ body { margin: 20px; background-color: #F3FbF3; }
 body.music { line-height: 90%; }
 
 a { text-decoration: none; color: #A52A2A; }
-a[title] { color: #BD3232; text-decoration: overline; }
+pre a[title] { color: #BD3232; text-decoration: overline; }
 
 label.current, a.current, a:hover { text-decoration: underline; color: #D91313; }
 
@@ -102,5 +102,5 @@ input[type=range] {
 
 table.floater-metronome {
 	position: fixed;
-	left: 595px;
+	left: 700px;
 }

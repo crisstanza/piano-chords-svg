@@ -90,14 +90,28 @@
 				function onDecoded(buffer, note) {
 					metronome.SOUNDS[note] = buffer;
 				}
-				function loadAudio(note) {
-					var request = new XMLHttpRequest();
-					request.open('GET', './audio/_' + note + '.wav.dat', true);
-					request.responseType = 'arraybuffer';
-					request.onload = function() {
-						metronome.audioContext.decodeAudioData(request.response, function(buffer) { onDecoded(buffer, note); });
-					};
-					request.send();
+				function loadAudio(note, uri) {
+					if (!uri) {
+						var uri = './audio/_' + note + '.wav';
+						loadAudio(note, uri);
+					} else {
+						var request = new XMLHttpRequest();
+						request.open('GET', uri, true);
+						request.responseType = 'arraybuffer';
+						request.onload = function() {
+							if (request.status === 200) {
+								metronome.audioContext.decodeAudioData(request.response, function(buffer) { onDecoded(buffer, note); });
+							} else {
+								var firstChar = uri.charAt(0);
+								if (firstChar == '.') {
+									loadAudio(note, 'https://raw.githubusercontent.com/crisstanza/piano-chords-svg/master/' + uri);
+								} else {
+									alert('Error. ' + uri);
+								}
+							}
+						};
+						request.send();
+					}
 				}
 				loadAudio(1);
 				loadAudio(4);
