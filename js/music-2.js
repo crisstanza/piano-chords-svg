@@ -3,6 +3,8 @@
 	var parent, musicPre, musicLinks;
 	var metronome;
 
+	var MUL = 4;
+
 // // // // // // // // // // // // // // // // // // // // // // // // //
 
 	function initGlobals(event) {
@@ -10,6 +12,8 @@
 		musicPre = Utils.$('music-pre');
 		musicLinks = musicPre.querySelectorAll('a');
 		metronome = {
+			p1: null,
+			p2: null,
 			beat: null,
 			beatNotes: null,
 			audioContext: null,
@@ -37,9 +41,10 @@
 				metronome.display.innerText--;
 			},
 			start: function(event) {
-				var MUL = 2;
+				metronome.p1 = 0;
+				metronome.p2 = 0;
 				if (metronome.displayCurrentBeat.value == '') {
-						metronome.beat = -4 * MUL;
+					metronome.beat = -4 * MUL;
 				} else {
 					var currentBeat = metronome.displayCurrentBeat.value * 1;
 					if (currentBeat >= metronome.beatNotes.length) {
@@ -59,17 +64,17 @@
 				clearInterval(metronome.TIMER);
 			},
 			play: function(event) {
-				metronome.displayCurrentBeat.value = metronome.beat;
 				var bufferSource = metronome.audioContext.createBufferSource();
 				bufferSource.buffer = null;
 				if (metronome.beat < 0) {
-					if (metronome.beat % 2 == 0) {
+					if (metronome.beat % 4 == 0) {
+						metronome.displayCurrentBeat.value = metronome.beat / MUL;
 						bufferSource.buffer = metronome.SOUNDS[4];
 					}
 				} else {
 					var beatNote = metronome.beatNotes[metronome.beat];
-					if (beatNote) {
-						var note = beatNote.replace(/\/\*.*\*\//g, '');
+					if (beatNote != undefined) {
+						var note = beatNote;
 						if (note != 0) {
 							bufferSource.buffer = metronome.SOUNDS[note*1];
 						}
@@ -84,7 +89,10 @@
 				metronome.beat += 1;
 			},
 			init: function(event) {
-				metronome.beatNotes = document.getElementById('music-pre').getAttribute('data-beats').split(',');
+				var beats = document.getElementById('music-pre').getAttribute('data-beats');
+				beats = beats.replace(/\/\*.*\*\//g, '');
+				beats = beats.replace(/'/g, '"');
+				metronome.beatNotes = JSON.parse(beats);
 				metronome.audioContext = new AudioContext() || new webkitAudioContext();
 				metronome.SOUNDS = [];
 				function onDecoded(buffer, note) {

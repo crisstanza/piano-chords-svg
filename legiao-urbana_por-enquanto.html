@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="description" content="Acordes para Piano e Teclado." />
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<link rel="icon" type="image/png" href="./favicon.png?v=1.0.0" />
+		<link rel="stylesheet" type="text/css" media="all" href="./css/css.css?v=1.0.0" />
+    <link rel="stylesheet" type="text/css" media="all" href="./css/t.css?v=1.0.0" />
+		<script type="text/javascript" src="./js/lib/Utils.js?v=1.0.0"></script>
+		<script type="text/javascript" src="./js/music-3.js?v=1.0.0"></script>
+		<title>Legi&atilde;o Urbana - Por Enquanto</title>
+	</head>
+	<body>
+		<div class="center">
+			<a href="./legiao-urbana_por-enquanto.html" class="lowlight"><h2>Legi&atilde;o Urbana - Por Enquanto</h2></a><br />
+      <table class="floater-metronome" class="center" border="0" cellpadding="4" cellspacing="0">
+        <tr>
+            <td rowspan="2">
+              <img src="./img/metronome.png" width="40" height="40" class="metronome" /></td> 
+            </td>
+            <td>
+              <a href="#up" id="bt-speed-up"><div class="arrow-up"></div></a>
+            </td>
+            <td rowspan="2">
+              <span class="display" id="metronome-display">50</span>
+              <audio id="audio-play-1">
+                <source src="./audio/_4.mp3" type="audio/mp3" />
+              </audio>
+            </td>
+            <td rowspan="2">
+              <a href="#play" id="bt-play"><div class="arrow-right"></div></a>
+              <input id="metronome-display-current-beat" class="display-current-beat" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <a href="#down" id="bt-speed-down"><div class="arrow-down"></div></a>
+            </td>
+        </tr>
+      </table>
+		</div>
+		<pre id="music-pre" data-beats="[
+        
+      10, 0, 4, 1, 0, 4, 0, 0,    1, 0, 4, 1, 0, 4, 0, 1,   1, 0, 4, 1, 0, 4, 0, 0,   1, 0, 4, 1, 0, 4, 0, 1,    /* intro */
+       1, 0, 4, 1, 0, 4, 0, 0,    1, 0, 4, 1, 0, 4, 0, 1,   1, 0, 4, 1, 0, 4, 0, 0,   1, 0, 4, 1, 0, 4, 0, 1,
+       1, 0, 4, 1, 0, 4, 0, 0,    1, 0, 4, 1, 0, 4, 0, 1,   1, 0, 4, 1, 0, 4, 0, 0,   1, 0, 4, 1, 0, 4, 0, 1,
+       1, 0, 4, 1, 0, 4, 0, 0,    1, 0, 4, 1, 0, 4, 0, 1,   1, 0, 4, 1, 0, 4, 0, 0,   1, 0, 4, 1, 0, 4, 0, 1,
+       1, 0, 4, 1, 0, 4, 0, 0,    1, 0, 4, 1, 0, 4, 0, 1,   1, 0, 4, 1, 0, 4, 0, 0,  10, 0, 4, 1, 0, 4, 0, 1,
+       1, 0, 4, 1, 0, 4, 0, 0,
+
+      10, 0, 4, 1, 0, 4, 0, 0,    1, 0, 4, 1, 0, 4, 0, 1,   1, 0, 4, 1, 0, 4, 0, 0,   1, 0, 4, 1, 0, 4, 0, 1,    /* mudaram */
+       1, 0, 4, 1, 0, 4, 0, 0,    1, 0, 4, 1, 0, 4, 0, 1,   1, 0, 4, 1, 0, 4, 0, 0,   1, 0, 4, 1, 0, 4, 0, 1,
+
+      10, 0, 4, 1, 0, 4, 0, 0,    1, 0, 4, 1, 0, 4, 0, 1,   1, 0, 4, 1, 0, 4, 0, 0,   1, 0, 4, 1, 0, 4, 0, 1,    /* se lembra */
+      10, 0, 4, 1, 0, 4, 0, 0,    1, 0, 4, 1, 0, 4, 0, 1,   1, 0, 4, 1, 0, 4, 0, 0,   1, 0, 4, 1, 0, 4, 0, 1,    /* que tudo era */
+       1, 0, 4, 1, 0, 4, 0, 0,    1, 0, 4, 1, 0, 4, 0, 1,   1, 0, 4, 1, 0, 4, 0, 0,   1, 0, 4, 1, 0, 4, 0, 1,
+
+      10, 0, 4, 1, 0, 4, 0, 0,    1, 0, 4, 1, 0, 4, 0, 1,   1, 0, 4, 1, 0, 4, 0, 0,   1, 0, 4, 1, 0, 4, 0, 1,    /* mas nada vai */
+       1, 0, 4, 1, 0, 4, 0, 0,    1, 0, 4, 1, 0, 4, 0, 1,   1, 0, 4, 1, 0, 4, 0, 0,   1, 0, 4, 1, 0, 4, 0, 1,
+
+       0
+
+    ]">
+
+D   D7+  G   F#m
+G   Em   G   A7
+Bm  F#m  G   D
+Bm  F#m  G   F#m
+G   A7   A7  D
+D
+
+   D         D7+     G         F#m
+ Mudaram as estações e nada mudou
+          G                    Em
+ Mas, eu sei que alguma coisa aconteceu
+       G              A7
+ Está tudo assim tão diferente
+ Bm                 F#m       G                  D
+ Se lembra quando a gente chegou um dia a acreditar
+ Bm                F#m
+ Que tudo era pra sempre
+ G         F#m
+ Sem saber
+             G     Em       A7       A7
+ Que o pra sempre sempre acaba?
+
+      D             A          G     F#m
+ Mas, nada vai conseguir mudar o que ficou
+         G
+ Quando penso em alguém
+
+    Em
+ Só penso em você
+   G          Em    A7
+ E aí então estamos bem
+ Bm                 F#m           G               D
+ Mesmo com tantos motivos pra deixar tudo como está
+   Bm                   F#m
+ E nem desistir, nem tentar
+        G         F#m
+ Agora tanto faz
+          G       A7          D
+ Estamos indo de volta pra casa</pre>
+		<div class="center">
+			<br />
+			<a title="c&oacute;digo-fonte" target="_blank" href="https://github.com/crisstanza/piano-chords-svg"><img border="0" src="./img/github.png" width="24" height="24" class="github-icon" /></a><br />
+      <br />
+      <a title="voltar" href="./">voltar</a><br />
+		</div>
+	</body>
+</html>
