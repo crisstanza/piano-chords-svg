@@ -1,0 +1,37 @@
+.metronome-1 {
+	width: 200px;
+	margin: auto;
+}
+
+.metronome-1 {
+	border: 1px solid #808080;
+	box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.25);
+	padding: 8px;
+	background-color: #F0F8FF;
+}
+
+.metronome-1:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.metronome-1 .less, .metronome-1 .more, .metronome-1 .speed {
+	float: left;
+}
+
+.metronome-1 .less, .metronome-1 .more { width: 20%; }
+.metronome-1 .speed { width: 60%; }
+
+.metronome-1-line-1 {
+	display: flex;
+}
+
+.metronome-1-line-2 {
+	padding-top: 8px;
+	padding-bottom: 12px;
+}
+
+.off {
+	opacity: 0.5;
+}
