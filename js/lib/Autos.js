@@ -24,9 +24,12 @@ if (!Autos) { var Autos = {}; }
 			let length = links.length;
 			for (let i = 0 ; i < length ; i++) {
 				let link = links[i];
-				let id = link.getAttribute('id');
-				let identifier = fixId(id);
-				link.addEventListener('click', function(event) { eval(parent+identifier+'_OnClick(event)'); } );
+				let href = link.getAttribute('href');
+				if (href.startsWith('#')) {
+					let id = link.getAttribute('id');
+					let identifier = fixId(id);
+					link.addEventListener('click', function(event) { eval(parent+identifier+'_OnClick(event)'); } );
+				}
 			}
 		}
 	}

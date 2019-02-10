@@ -12,6 +12,7 @@ if (!Utils) { var Utils = {}; }
 		request.onreadystatechange = function() {
 			if (request.readyState == 4 && request.status == 200) {
 				var data = request.responseText;
+				data = removeComments(data);
 				var obj = JSON.parse(data);
 				if (success) {
 					success(obj);
@@ -24,6 +25,10 @@ if (!Utils) { var Utils = {}; }
 		};
  		request.send();
 	};
+
+	function removeComments(str) {
+		return str.replace(/\/\*.*[\s\S]+\*\//g, '');
+	}
 
 	function init(event) {
 	}
