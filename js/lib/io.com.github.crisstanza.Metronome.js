@@ -26,12 +26,7 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 				if (this.ibc < 0) {
 					let sound = _sound ? _sound : 5;
 					this.beats.innerHTML = this.ibc;
-
-					let bufferSource = io.com.github.Metronome.AUDIO_CONTEXT.createBufferSource();
-					bufferSource.buffer = io.com.github.Metronome.SOUNDS[sound].buffer;
-					bufferSource.connect(io.com.github.Metronome.AUDIO_CONTEXT.destination);
-					bufferSource.start();
-
+					io.com.github.Metronome.PLAY(sound);
 					this.ibc++;
 					let speed = this.speed.innerHTML;
 					setTimeout( function() { _this.play(); }, 60000 / speed );
@@ -39,23 +34,14 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 					if (this.bc == 0) {
 						this.bc = 1;
 					}
-
 					if (this.bc % (this.music.subdivisions + 1) == 1) {
 						this.beats.innerHTML = (this.vc - 1) % (this.music.meter) + 1;
 						this.vc++;
 					}
-
 					let sound = this.music.beats[this.c];
-					if (sound > 0) {
-					var bufferSource = io.com.github.Metronome.AUDIO_CONTEXT.createBufferSource();
-						bufferSource.buffer = io.com.github.Metronome.SOUNDS[sound].buffer;
-						bufferSource.connect(io.com.github.Metronome.AUDIO_CONTEXT.destination);
-						bufferSource.start();
-					}
-
+					io.com.github.Metronome.PLAY(sound);
 					this.c++;
 					this.bc++;
-
 					if (this.c < this.music.beats.length) {
 						let speed = this.speed.innerHTML * (this.music.subdivisions + 1);
 						setTimeout( function() { _this.play(io.com.github.Metronome.SOUNDS[_this.c]); }, 60000 / speed );
@@ -80,6 +66,25 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 		'_ton.wav' // 9
 	];
 	io.com.github.Metronome.SOUNDS_LENGTH = io.com.github.Metronome.SOUND_NAMES.length - 1;
+	
+	io.com.github.Metronome.PLAY = function(obj) {
+		if (typeof obj == 'number') {
+			io.com.github.Metronome.PLAY_SOUND(obj);
+		} else {
+			let length = obj.length;
+			for (let i = 0 ; i <= length ; i++) {
+				io.com.github.Metronome.PLAY_SOUND(obj[i]);
+			}
+		}
+	};
+	io.com.github.Metronome.PLAY_SOUND = function(sound) {
+		if (sound > 0) {
+			let bufferSource = io.com.github.Metronome.AUDIO_CONTEXT.createBufferSource();
+			bufferSource.buffer = io.com.github.Metronome.SOUNDS[sound].buffer;
+			bufferSource.connect(io.com.github.Metronome.AUDIO_CONTEXT.destination);
+			bufferSource.start();
+		}
+	};
 
 	io.com.github.Metronome.prototype.btLess_OnClick = function(event) {
 		this.speed.innerHTML--;
