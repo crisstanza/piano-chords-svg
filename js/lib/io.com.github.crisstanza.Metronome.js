@@ -140,12 +140,12 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 					if (firstChar == '.') {
 						initAudio('https://raw.githubusercontent.com/crisstanza/piano-chords-svg/master/audio/', sound);
 					} else {
-						alert('(3) Error. ' + uri);
+						console.log('(3) Error. ' + uri);
 					}
-					alert('(1) Error. ' + uri);
+					console.log('(1) Error. ' + uri);
 				}
 			} else {
-				alert('(2) Error. ' + uri);
+				console.log('(2) Error. ' + uri);
 			}
 		};
 		request.send();
