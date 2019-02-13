@@ -125,17 +125,27 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 		}
 	};
 
-	function initAudio(sound) {
+	function initAudio(prefix, sound) {
 		let soundName = io.com.github.Metronome.SOUND_NAMES[sound];
-		let uri = './audio/' + soundName;
+		let uri = prefix + soundName;
 		let request = new XMLHttpRequest();
 		request.open('GET', uri, true);
 		request.responseType = 'arraybuffer';
 		request.onload = function() {
-			if (request.readyState == 4 && request.status == 200) {
-				io.com.github.Metronome.SOUNDS[sound] = { response: request.response, buffer: null };
+			if (request.readyState == 4) {
+				if (request.status == 200) {
+					io.com.github.Metronome.SOUNDS[sound] = { response: request.response, buffer: null };
+				} else {
+					var firstChar = prefix.charAt(0);
+					if (firstChar == '.') {
+						initAudio('https://raw.githubusercontent.com/crisstanza/piano-chords-svg/master/audio/', sound);
+					} else {
+						alert('(3) Error. ' + uri);
+					}
+					alert('(1) Error. ' + uri);
+				}
 			} else {
-				console.log('Error. ' + uri);
+				alert('(2) Error. ' + uri);
 			}
 		};
 		request.send();
@@ -144,7 +154,7 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 	function init(event) {
 		io.com.github.Metronome.SOUNDS[0] = null;
 		for (let i = 1 ; i <= io.com.github.Metronome.SOUNDS_LENGTH ; i++) {
-			initAudio(i);
+			initAudio('./audio/', i);
 		}
 	}
 
