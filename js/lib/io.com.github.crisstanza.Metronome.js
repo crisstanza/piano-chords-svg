@@ -55,7 +55,7 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 	io.com.github.Metronome.SOUNDS = [];
 	io.com.github.Metronome.SOUND_NAMES = [
 		null, // 0
-		'_bumbo.wav', // 1
+		'_bumbo.aif', // 1
 		'_caixa_aro.wav', // 2
 		'_caixa_esteira.wav', // 3
 		'_caixa.wav', // 4
@@ -168,7 +168,8 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 	}
 
 	function initBuffers(event, metronome) {
-		io.com.github.Metronome.AUDIO_CONTEXT = new AudioContext() || new webkitAudioContext();
+		let ac = window.AudioContext || window.webkitAudioContext || false;
+		io.com.github.Metronome.AUDIO_CONTEXT = new ac();
 		for (let i = 1 ; i <= io.com.github.Metronome.SOUNDS_LENGTH ; i++) {
 			io.com.github.Metronome.AUDIO_CONTEXT.decodeAudioData(
 				io.com.github.Metronome.SOUNDS[i].response,
