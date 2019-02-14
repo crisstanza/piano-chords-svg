@@ -55,7 +55,7 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 	io.com.github.Metronome.SOUNDS = [];
 	io.com.github.Metronome.SOUND_NAMES = [
 		null, // 0
-		'_bumbo.aif', // 1
+		'_bumbo.wav', // 1
 		'_caixa_aro.wav', // 2
 		'_caixa_esteira.wav', // 3
 		'_caixa.wav', // 4
