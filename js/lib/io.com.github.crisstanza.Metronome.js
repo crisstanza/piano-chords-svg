@@ -7,21 +7,30 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 
 (function() {
 
-	io.com.github.Metronome = function(speed, btLess, btMore, btStart, btStop, beats) {
+	io.com.github.Metronome = function(speed, btLess, btMore, btStart, btStop, btPause, beats) {
 		this.speed = speed;
 		this.btLess = btLess;
 		this.btMore = btMore;
 		this.btStart = btStart;
 		this.btStop = btStop;
+		this.btPause = btPause;
 		this.beats = beats;
+		this.beatNotes;
 		this.canPlay = 0;
 		this.music = null;
 		this.ibc = null; // intro beat counter
-		this.bc = null; // beat counter
-		this.c = null; // music counter
-		this.vc = null; // visual counter
+		this.bc = 1; // beat counter
+		this.c = 0; // music counter
+		this.vc = 1; // visual counter
 		this.play = function(_sound) {
 			if (this.canPlay == 1) {
+				{
+					if (this.ibc < 0) {
+						// console.log('ibc: ' + this.ibc, 'bc: ' + this.bc, 'c: ' + this.c, 'vc: ' + this.vc);
+					} else {
+						console.log('bc: ' + this.bc, 'c: ' + this.c, 'vc: ' + this.vc);
+					}
+				}
 				let _this = this;
 				if (this.ibc < 0) {
 					let sound = _sound ? _sound : 5;
@@ -31,11 +40,8 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 					let speed = this.speed.innerHTML;
 					setTimeout( function() { _this.play(); }, 60000 / speed );
 				} else {
-					if (this.bc == 0) {
-						this.bc = 1;
-					}
 					if (this.bc % (this.music.subdivisions + 1) == 1) {
-						this.beats.innerHTML = (this.vc - 1) % (this.music.meter) + 1;
+						this.beats.innerHTML = (this.vc - 1) % (this.music.meter) + 1; /* r1 */
 						this.vc++;
 					}
 					let sound = this.music.beats[this.c];
@@ -45,9 +51,16 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 					if (this.c < this.music.beats.length) {
 						let speed = this.speed.innerHTML * (this.music.subdivisions + 1);
 						setTimeout( function() { _this.play(io.com.github.Metronome.SOUNDS[_this.c]); }, 60000 / speed );
+						this.swhowBeatNote()
+					} else {
+						this.endOfTheBeats();
 					}
 				}
 			}
+		};
+		this.beatNotes = Autos.initLinksFrom(musicPre, this);
+		if (!this.beatNotes || this.beatNotes.length == 0) {
+			io.com.github.Metronome.prototype.swhowBeatNote = function() {};
 		}
 	};
 
@@ -79,12 +92,40 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 	};
 	io.com.github.Metronome.PLAY_SOUND = function(sound) {
 		if (sound > 0) {
+			// io.com.github.Metronome.AUDIO_CONTEXT.createBuffer(1, 1, 22050);
 			let bufferSource = io.com.github.Metronome.AUDIO_CONTEXT.createBufferSource();
 			bufferSource.buffer = io.com.github.Metronome.SOUNDS[sound].buffer;
 			bufferSource.connect(io.com.github.Metronome.AUDIO_CONTEXT.destination);
-			bufferSource.start();
+			bufferSource.start(/* 0 */);
 		}
 	};
+
+	io.com.github.Metronome.prototype._OnClickFrom = function(event, i) {
+		let link = event.target;
+		this.clearCurrentBeatNote();
+		this.btStop.setAttribute('class', '');
+		this.ibc = 0;
+		link.setAttribute('class', 'current-beat-note');
+		this.vc = i + 1;
+		let mul = this.music.subdivisions + 1; /*r4 */
+		this.bc = this.vc * mul - 1; /* r2 */
+		this.c = this.vc * mul - 2; /* r3 */
+		this.beats.innerHTML = (this.vc - 1) % (this.music.meter) + 1; /* r1 */
+		console.log('bc: ' + this.bc, 'c: ' + this.c, 'vc: ' + this.vc, 'event: ' + event);
+	};
+
+	io.com.github.Metronome.prototype._OnKeyUp = function(event) {
+		let keyCode = event.keyCode;
+		let charKeyCode = String.fromCharCode(keyCode).toLowerCase();
+		if (charKeyCode == 's') {
+			this.btStart_OnClick(event);
+		} else  if (charKeyCode == 't') {
+			this.btStop_OnClick(event);
+		}
+		if (charKeyCode == 'p') {
+			this.btPause_OnClick(event);
+		}
+	}
 
 	io.com.github.Metronome.prototype.btLess_OnClick = function(event) {
 		this.speed.innerHTML--;
@@ -101,28 +142,67 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 			this.canPlay = 1;
 			this.btStart.setAttribute('class', 'off');
 			this.btStop.setAttribute('class', '');
+			this.btPause.setAttribute('class', '');
 			if (io.com.github.Metronome.SOUNDS.length == 10) {
-				this.ibc = - this.music.meter * this.music.intro;
-				this.bc = 0;
-				this.c = 0;
-				this.vc = 1;
+				if (this.ibc == null) {
+					this.ibc = - this.music.meter * this.music.intro;
+				}
 				this.play();
 			}
 		}
 	};
 
 	io.com.github.Metronome.prototype.btStop_OnClick = function(event) {
-		this.btStop.setAttribute('class', 'off');
-		this.btStart.setAttribute('class', '');
 		this.beats.innerHTML = '?';
+		this.clearCurrentBeatNote(event);
+		this.endOfTheBeats(event);
+	};
+
+	io.com.github.Metronome.prototype.clearCurrentBeatNote = function(event) {
+		let currentBeatNote = musicPre.querySelector('a[class=current-beat-note]');
+		if (currentBeatNote) {
+			currentBeatNote.removeAttribute('class');
+		}
+	};
+
+	io.com.github.Metronome.prototype.endOfTheBeats = function(event) {
+		this.btStop.setAttribute('class', 'off');
+		this.btPause.setAttribute('class', 'off');
+		this.btStart.setAttribute('class', '');
+		this.ibc = null;
+		this.bc = 1;
+		this.c = 0;
+		this.vc = 1;
 		this.canPlay = 0;
+	};
+
+	io.com.github.Metronome.prototype.btPause_OnClick = function(event) {
+		console.log('bc: ' + this.bc, 'c: ' + this.c, 'vc: ' + this.vc, 'event: ' + event);
+		this.btPause.setAttribute('class', 'off');
+		this.btStart.setAttribute('class', '');
+		this.canPlay = 0;
+		this.vc--;
+		let mul = this.music.subdivisions + 1; /*r4 */
+		this.bc = this.vc * mul - 1; /* r2 */
+		this.c = this.vc * mul - 2; /* r3 */
 	};
 
 	io.com.github.Metronome.prototype.setMusic = function(music) {
 		this.music = music;
+		speed.innerHTML = music.bpm;
 		if (this.music) {
 			this.btStop_OnClick();
 		}
+	};
+
+	io.com.github.Metronome.prototype.swhowBeatNote = function() {
+		let index = this.vc - 2;
+		if (index > 0) {
+			let previousBeatNote = this.beatNotes[index - 1];
+			previousBeatNote.removeAttribute('class');
+		}
+		let beatNote = this.beatNotes[index];
+		beatNote.setAttribute('class', 'current-beat-note');
 	};
 
 	function initAudio(prefix, sound) {

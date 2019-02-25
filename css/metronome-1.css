@@ -3,6 +3,9 @@
 	margin: auto;
 }
 
+.metronome-1 a, .metronome-1 a u {
+	color: #144AE2;
+}
 .metronome-1 {
 	border: 1px solid #808080;
 	box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.25);
@@ -30,6 +33,12 @@
 .metronome-1-line-2 {
 	padding-top: 8px;
 	padding-bottom: 12px;
+}
+
+.current-beat-note {
+	font-weight: bold;
+	color: green;
+	background-color: yellow;
 }
 
 .off {
