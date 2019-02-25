@@ -15,23 +15,57 @@ if (!Autos) { var Autos = {}; }
 				window[identifier] = element;
 			}
 		}
+		return elements;
+	};
+
+	Autos.initKeys = function(obj) {
+		let body = document.body;
+		let autoKeys = body.getAttribute('data-autos-keys');
+		if (autoKeys) {
+			let parent = obj ? 'obj.' : '';
+			let keys = autoKeys.split(/,\s+/);
+			let length = keys.length;
+			for (let i = 0 ; i < length ; i++) {
+				let key = keys[i];
+				body.addEventListener('keyup', function(event) {
+					let keyCode = event.keyCode;
+					let charKeyCode = String.fromCharCode(keyCode).toLowerCase();
+					if (key == charKeyCode) {
+						eval(parent+'_OnKeyUp(event)');
+					}
+				} );
+			}
+		}
+		return autoKeys;
 	};
 
 	Autos.initLinks = function(obj) {
-		let links = document.querySelectorAll('a[id]:not([id=""])');
+		let links = document.querySelectorAll('a[id][href^="#"]:not([id=""])');
+		if (links) {
+			let parent = obj ? 'obj.' : '';
+			let length = links.length;
+			for (let i = 0 ; i < length ; i++) {
+				let link = links[i];
+				let id = link.getAttribute('id');
+				let identifier = fixId(id);
+				link.addEventListener('click', function(event) { eval(parent+identifier+'_OnClick(event)'); } );
+			}
+		}
+		return links;
+	}
+
+	Autos.initLinksFrom = function(container, obj) {
+		let links = container.querySelectorAll('a[href^="#"]:not([id])');
 		if (links) {
 			let parent = obj ? 'obj.' : '';
 			let length = links.length;
 			for (let i = 0 ; i < length ; i++) {
 				let link = links[i];
 				let href = link.getAttribute('href');
-				if (href.startsWith('#')) {
-					let id = link.getAttribute('id');
-					let identifier = fixId(id);
-					link.addEventListener('click', function(event) { eval(parent+identifier+'_OnClick(event)'); } );
-				}
+				link.addEventListener('click', function(event) { eval(parent+'_OnClickFrom(event, i)'); } );
 			}
 		}
+		return links;
 	}
 
 	function fixId(id) {
