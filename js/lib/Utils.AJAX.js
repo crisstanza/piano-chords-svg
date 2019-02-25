@@ -27,7 +27,7 @@ if (!Utils) { var Utils = {}; }
 	};
 
 	function removeComments(str) {
-		return str.replace(/\/\*.*[\s\S]+\*\//g, '');
+		return str.replace(/(\/\*[\S\s]*?\*\/)|(\/\/[^\n]*)/g, '');
 	}
 
 	function init(event) {
