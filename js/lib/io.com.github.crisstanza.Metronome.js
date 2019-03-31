@@ -21,14 +21,15 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 		this.ibc = null; // intro beat counter
 		this.bc = 1; // beat counter
 		this.c = 0; // music counter
-		this.vc = 1; // visual counter
+		this.vc = 1; // visual counter (sound)
+		this.vc2 = 1; // visual counter (notes)
 		this.play = function(_sound) {
 			if (this.canPlay == 1) {
 				{
 					if (this.ibc < 0) {
 						// console.log('ibc: ' + this.ibc, 'bc: ' + this.bc, 'c: ' + this.c, 'vc: ' + this.vc);
 					} else {
-						console.log('bc: ' + this.bc, 'c: ' + this.c, 'vc: ' + this.vc);
+						// console.log('bc: ' + this.bc, 'c: ' + this.c, 'vc: ' + this.vc);
 					}
 				}
 				let _this = this;
@@ -41,18 +42,24 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 					setTimeout( function() { _this.play(); }, 60000 / speed );
 				} else {
 					if (this.bc % (this.music.subdivisions + 1) == 1) {
-						this.beats.innerHTML = (this.vc - 1) % (this.music.meter) + 1; /* r1 */
+						this.showBeat();
 						this.vc++;
+						this.vc2++;
 					}
 					let sound = this.music.beats[this.c];
 					io.com.github.Metronome.PLAY(sound);
 					this.c++;
 					this.bc++;
 					if (this.c < this.music.beats.length) {
-						let speed = this.speed.innerHTML * (this.music.subdivisions + 1);
-						setTimeout( function() { _this.play(io.com.github.Metronome.SOUNDS[_this.c]); }, 60000 / speed );
-						this.swhowBeatNote()
+						if (this.checkChanges(sound)) {
+							this.play(io.com.github.Metronome.SOUNDS[this.c]);
+						} else {
+							let speed = this.speed.innerHTML * (this.music.subdivisions + 1);
+							setTimeout( function() { _this.play(io.com.github.Metronome.SOUNDS[_this.c]); }, 60000 / speed );
+						}
+						this.showBeatNote()
 					} else {
+						this.showBeatNote()
 						this.endOfTheBeats();
 					}
 				}
@@ -60,7 +67,7 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 		};
 		this.beatNotes = Autos.initLinksFrom(musicPre, this);
 		if (!this.beatNotes || this.beatNotes.length == 0) {
-			io.com.github.Metronome.prototype.swhowBeatNote = function() {};
+			io.com.github.Metronome.prototype.showBeatNote = function() {};
 		}
 	};
 
@@ -80,6 +87,14 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 	];
 	io.com.github.Metronome.SOUNDS_LENGTH = io.com.github.Metronome.SOUND_NAMES.length - 1;
 	
+	io.com.github.Metronome.PLAY_SOUND = function(sound) {
+		if (sound > 0) {
+			let bufferSource = io.com.github.Metronome.AUDIO_CONTEXT.createBufferSource();
+			bufferSource.buffer = io.com.github.Metronome.SOUNDS[sound].buffer;
+			bufferSource.connect(io.com.github.Metronome.AUDIO_CONTEXT.destination);
+			bufferSource.start(/* 0 */);
+		}
+	};
 	io.com.github.Metronome.PLAY = function(obj) {
 		if (typeof obj == 'number') {
 			io.com.github.Metronome.PLAY_SOUND(obj);
@@ -90,13 +105,24 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 			}
 		}
 	};
-	io.com.github.Metronome.PLAY_SOUND = function(sound) {
-		if (sound > 0) {
-			// io.com.github.Metronome.AUDIO_CONTEXT.createBuffer(1, 1, 22050);
-			let bufferSource = io.com.github.Metronome.AUDIO_CONTEXT.createBufferSource();
-			bufferSource.buffer = io.com.github.Metronome.SOUNDS[sound].buffer;
-			bufferSource.connect(io.com.github.Metronome.AUDIO_CONTEXT.destination);
-			bufferSource.start(/* 0 */);
+
+	io.com.github.Metronome.prototype.checkChanges = function(obj) {
+		if (typeof obj == 'object' && !Array.isArray(obj)) {
+			if (obj.bpm) {
+				this.music.bpm = obj.bpm;
+				speed.innerHTML = this.music.bpm;
+			}
+			if (obj.meter) {
+				this.music.meter = obj.meter;
+				this.beats.innerHTML = 1
+				this.bc += this.music.subdivisions;
+				this.vc -= 1;
+				this.vc2 = 1;
+				meter.innerHTML = this.music.meter;
+			}
+			return true;
+		} else {
+			return false;
 		}
 	};
 
@@ -107,11 +133,14 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 		this.ibc = 0;
 		link.setAttribute('class', 'current-beat-note');
 		this.vc = i + 1;
+		this.vc2 = this.vc;
 		let mul = this.music.subdivisions + 1; /*r4 */
 		this.bc = this.vc * mul - 1; /* r2 */
 		this.c = this.vc * mul - 2; /* r3 */
-		this.beats.innerHTML = (this.vc - 1) % (this.music.meter) + 1; /* r1 */
-		console.log('bc: ' + this.bc, 'c: ' + this.c, 'vc: ' + this.vc, 'event: ' + event);
+		this.showBeat();
+		{
+			// console.log('bc: ' + this.bc, 'c: ' + this.c, 'vc: ' + this.vc, 'event: ' + event);
+		}
 	};
 
 	io.com.github.Metronome.prototype._OnKeyUp = function(event) {
@@ -126,7 +155,6 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 			this.btPause_OnClick(event);
 		}
 	}
-
 	io.com.github.Metronome.prototype.btLess_OnClick = function(event) {
 		this.speed.innerHTML--;
 	};
@@ -173,29 +201,34 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 		this.bc = 1;
 		this.c = 0;
 		this.vc = 1;
+		this.vc2 = 1;
 		this.canPlay = 0;
 	};
 
 	io.com.github.Metronome.prototype.btPause_OnClick = function(event) {
-		console.log('bc: ' + this.bc, 'c: ' + this.c, 'vc: ' + this.vc, 'event: ' + event);
+		{
+			// console.log('bc: ' + this.bc, 'c: ' + this.c, 'vc: ' + this.vc, 'event: ' + event);
+		}
 		this.btPause.setAttribute('class', 'off');
 		this.btStart.setAttribute('class', '');
 		this.canPlay = 0;
-		this.vc--;
-		let mul = this.music.subdivisions + 1; /*r4 */
-		this.bc = this.vc * mul - 1; /* r2 */
-		this.c = this.vc * mul - 2; /* r3 */
+		// this.vc--;
+		// this.vc2 -= ?;
+		// let mul = this.music.subdivisions + 1; /*r4 */
+		// this.bc = this.vc * mul - 1; /* r2 */
+		// this.c = this.vc * mul - 2; /* r3 */
 	};
 
 	io.com.github.Metronome.prototype.setMusic = function(music) {
 		this.music = music;
-		speed.innerHTML = music.bpm;
+		speed.innerHTML = this.music.bpm;
+		meter.innerHTML = this.music.meter;
 		if (this.music) {
 			this.btStop_OnClick();
 		}
 	};
 
-	io.com.github.Metronome.prototype.swhowBeatNote = function() {
+	io.com.github.Metronome.prototype.showBeatNote = function() {
 		let index = this.vc - 2;
 		if (index > 0) {
 			let previousBeatNote = this.beatNotes[index - 1];
@@ -203,6 +236,10 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 		}
 		let beatNote = this.beatNotes[index];
 		beatNote.setAttribute('class', 'current-beat-note');
+	};
+
+	io.com.github.Metronome.prototype.showBeat = function() {
+		this.beats.innerHTML = (this.vc2 - 1) % (this.music.meter) + 1;
 	};
 
 	function initAudio(prefix, sound) {
