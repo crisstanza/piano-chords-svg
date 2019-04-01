@@ -167,6 +167,7 @@ if (!io.com.github.crisstanza) { io.com.github = {}; }
 		if (io.com.github.Metronome.AUDIO_CONTEXT == null) {
 			initBuffers(event, this);
 		} else {
+			this.clearCurrentBeatNote();
 			this.canPlay = 1;
 			this.btStart.setAttribute('class', 'off');
 			this.btStop.setAttribute('class', '');
